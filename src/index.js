@@ -6,7 +6,7 @@ const { nanoid } = require("nanoid");
 
 function genUser() {
     const user = {
-        userId: `nanoid(4)`,
+        userId: `${nanoid(4)}`,
         hackerName:`${faker.hacker.adjective()} ${faker.science.chemicalElement()} ${faker.animal.type()}`,
     }
     console.log(user);
