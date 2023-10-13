@@ -2,88 +2,89 @@ const { faker } = require("@faker-js/faker");
 const fs = require("fs");
 const { writeFileSync } = require("node:fs");
 const { nanoid } = require("nanoid");
+const users = require("../data/users.json");
+
+// const users = require("../data/users.json");
+
+// id: `${nanoid(4)}`,
+
+// hackerName: faker.hacker.adjective() + faker.science.chemicalElement() + ${faker.animal.type(),
+
+// messageTitle: `Help with ${faker.hacker.adjective()} ${faker.hacker.abbreviation()} on ${faker.git.branch()}`,
+
+// messageContent: `${faker.lorem.paragraph()}`,
+
+// isResolved: faker.datatype.boolean(),
+
+// numberOfUpvotes: Number((Math.random() * 5).toFixed(2))
 
 
-function genUser() {
-    const user = {
-        userId: `${nanoid(4)}`,
-        hackerName:`${faker.hacker.adjective()} ${faker.science.chemicalElement()} ${faker.animal.type()}`,
-    }
-    console.log(user);
-    return user;
+function addUser(data) {
+  let newUser = data;
+
+  users.push(data);
+  return newUser;
 }
 
-genUser();
+function generateUser() {
+    let newUser = addUser({id: nanoid(4), hackerName: faker.hacker.adjective() + " " + faker.science.chemicalElement().name + " " + faker.animal.type()}); 
 
-function genMessage() {
-    const message = {
-        messageId: `${nanoid(4)}`,
-        messageTitle: `Help with ${faker.hacker.adjective()} ${faker.hacker.abbreviation()} on ${faker.git.branch()}`,
+    console.log(newUser);
+}
 
-        messageContent: `${faker.lorem.paragraph()}`,
+generateUser();
 
-        isResolved: `${faker.datatype.boolean()}`,
+function getUsers() {
+  return users;
+}
 
-        numberOfUpvotes: `${Math.random().toFixed(0)}`
-    }
-    console.log(message);
+getUsers();
+
+
+
+function addMessage(data) {
+    let newMsg = data;
+
+    message.push(data);
     return message;
 }
 
-genMessage();
-
-function getResponseById(messageId) {
-    const messageResponse = {
-        messageResponse: `${faker.hacker.phrase()}`,
-    }
-
-    console.log(messageResponse);
-    return messageResponse;
-}
-
-function getVotesByMessageId() {
+function generateMessage() {
     
 }
 
-function getUserById(userId) {
-    console.log(users.find((user) => user.userId === id));
-    return users.find((user) => user.userId === id);
+
+
+function getSpecificUser(index) {
+  return users[index];
 }
 
-// function updateUserById(id, data) {
-    
-// }
+// Updating a supermarket
+function updateUsers(index, data) {
+  supermarkets[index] = {
+    ...users[index],
+    ...data,
+  };
 
-function updateMessageById(messageId, message) {
-    const index = message.findIndex((message) => message.id === messageId);
-    message.splice(index, 1);
-    console.log(`Message with id ${messageId} was updated.`);
+  return users[index];
 }
 
-function deleteMessageById(messageId, message) {
-    const index = message.findIndex((message) => message.messageId === id);
-    message.splice(index, 1);
-    console.log(`Message with id ${messageId} was deleted.`);
+function deleteUser(index) {
+  users.splice(index, 1);
 }
-
-function deleteUserById(userId) {
-    const index = user.findIndex((user) => user.userId === id);
-    user.splice(index, 1);
-    console.log(`User with id ${userId} was deleted.`); 
-}
-
-
 
 function saveUsers() {
-    const userData = JSON.stringify(user, null, 2);
-    fs.writeFileSync("./data/hackerUsers.json", userData)
+  const stringifiedData = JSON.stringify(users, null, 2);
+  fs.writeFileSync("./data/users.json", stringifiedData);
 }
 
 saveUsers();
 
-function saveMessages() {
-    const messageData = JSON.stringify(user, null, 2);
-    fs.writeFileSync("./data/hackerMessages.json", messageData)
-}
-
-saveMessages();
+module.exports = {
+  addUser,
+  getUsers,
+  getSpecificUser,
+  updateUsers,
+  deleteUser,
+  saveUsers
+};

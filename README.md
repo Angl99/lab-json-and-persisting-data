@@ -26,12 +26,18 @@ You can choose whatever app idea you want and whatever data set makes sense for 
 For example, if you chose to make a forum for hackers, you could use the following:
 
 - `id`: A unique id
+
 - `hackerName`: faker `adjective` + `chemicalElement` + `animal` ( e.g.Hyper Hydrogen Hyena)
+
 - `messageTitle`: Help with `hacker.adjective` + `hacker.abbreviation` on `git.branch`.
+
 - `messageContent`: `lorem.paragraph`.
+
 - `isResolved`: A boolean for whether or not the issue is resolved.
+
 - `messageResponse` : `hacker.phrase`.
   -date`:` the message was posted.
+
 - `numberOfUpvotes`: the number of upvotes
 
 - Through the command line, a user should be able to choose whether to create one or many randomly generated messages.
